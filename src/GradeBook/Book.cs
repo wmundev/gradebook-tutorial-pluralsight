@@ -7,11 +7,14 @@ namespace GradeBook
     {
         private List<double> grades;
         private string name;
+        private readonly string category;
+        private const string WOW = "wow";
 
         public Book(string name)
         {
             this.grades = new List<double>();
             this.name = name;
+            category = "Science";
         }
 
         public void AddGrade(double grade)
