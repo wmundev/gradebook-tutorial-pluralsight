@@ -5,8 +5,9 @@ namespace GradeBook
 {
     public class Book
     {
-        private List<double> grades ;
+        private List<double> grades;
         private string name;
+
         public Book(string name)
         {
             this.grades = new List<double>();
@@ -41,19 +42,59 @@ namespace GradeBook
                 lowGrade = Math.Min(number, lowGrade);
                 result += number;
             }
+
             stats.Average = result / grades.Count;
             stats.High = highGrade;
             stats.Low = lowGrade;
+
+            switch (stats.Average)
+            {
+                case var d when d >= 90.0:
+                    stats.Letter = 'A';
+                    break;
+                case var d when d >= 80.0:
+                    stats.Letter = 'B';
+                    break;
+                case var d when d >= 70.0:
+                    stats.Letter = 'C';
+                    break;
+                case var d when d >= 60.0:
+                    stats.Letter = 'D';
+                    break;
+                default:
+                    stats.Letter = 'F';
+                    break;
+            }
+            
             return stats;
         }
 
         public void ShowStats()
         {
             Stats CalculatedStats = GetStats();
-            
+
             Console.WriteLine($"High Grade {CalculatedStats.High}");
             Console.WriteLine($"Low Grade {CalculatedStats.Low}");
             Console.WriteLine($"Average {CalculatedStats.Average:N1}");
+        }
+
+        public void AddLetterGrade(char letter)
+        {
+            switch (letter)
+            {
+                case 'A':
+                    AddGrade(90);
+                    break;
+                case 'B':
+                    AddGrade(80);
+                    break;
+                case 'C':
+                    AddGrade(70);
+                    break;
+                default:
+                    AddGrade(0);
+                    break;
+            }
         }
     }
 }

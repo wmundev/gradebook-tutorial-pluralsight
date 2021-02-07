@@ -3,7 +3,7 @@ using Xunit;
 
 namespace GradeBook.Tests
 {
-    public class UnitTest1
+    public class BookTest
     {
         [Fact]
         public void TestBookName()
@@ -27,6 +27,7 @@ namespace GradeBook.Tests
             Assert.Equal(result.Low, 20.0);
             Assert.Equal(result.High, 40.0);
             Assert.Equal(result.Average, 30.0);
+            Assert.Equal(result.Letter, 'F');
         }
     }
 }
