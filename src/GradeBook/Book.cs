@@ -9,6 +9,7 @@ namespace GradeBook
         private string name;
         private readonly string category;
         private const string WOW = "wow";
+        public event GradeAddedDelegate GradeAdded;
 
         public Book(string name)
         {
@@ -19,7 +20,18 @@ namespace GradeBook
 
         public void AddGrade(double grade)
         {
-            grades.Add(grade);
+            if (grade <= 100 && grade >= 0)
+            {
+                grades.Add(grade);
+                if (GradeAdded != null)
+                {
+                    GradeAdded(this, new EventArgs());
+                }
+            }
+            else
+            {
+                throw new ArgumentException("Invalid grade");
+            }
         }
 
         public string Name

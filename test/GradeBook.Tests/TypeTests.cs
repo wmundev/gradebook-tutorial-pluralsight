@@ -13,16 +13,25 @@ namespace GradeBook.Tests
         public void WriteLogDelegateCanPointToMethod()
         {
             WriteLogDelegate log;
-
+            
+            //normal delegates
             log = new WriteLogDelegate(ReturnMessage);
+            
+            //multi cast delegates
+            log += ReturnDiffMessage;
 
             var result = log("Hello!");
-            Assert.Equal("Hello!", result);
+            Assert.Equal("huh", result);
         }
 
         string ReturnMessage(string message)
         {
             return message;
+        }
+        
+        string ReturnDiffMessage(string message)
+        {
+            return "huh";
         }
         
         
@@ -76,7 +85,7 @@ namespace GradeBook.Tests
             Book book1 = GetBook("Book 1");
             GetBookSetName(ref book1, "New Name");
             
-            Assert.Equal(book1.Name, "Book 1");
+            Assert.Equal(book1.Name, "New Name");
         }
 
         private void GetBookSetName(ref Book book, string name)

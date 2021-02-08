@@ -8,6 +8,8 @@ namespace GradeBook
         static void Main(string[] args)
         {
             Book book = new Book("new book");
+            //add a delegate
+            book.GradeAdded += OnGradeAdded;
             // book.AddGrade(12.7);
             // book.AddGrade(10.3);
             // book.AddGrade(6.11);
@@ -33,6 +35,11 @@ namespace GradeBook
             }
             
             book.ShowStats();
+        }
+
+        static void OnGradeAdded(object sender, EventArgs eventArgs)
+        {
+            Console.WriteLine("A grade was added");
         }
     }
 }
