@@ -7,15 +7,20 @@ namespace GradeBook
     {
         static void Main(string[] args)
         {
-            Book book = new Book("new book");
+            // InMemoryBook inMemoryBook = new InMemoryBook("new book");
+            IBook diskBook = new DiskBook("disk book");
             //add a delegate
-            book.GradeAdded += OnGradeAdded;
-            // book.AddGrade(12.7);
-            // book.AddGrade(10.3);
-            // book.AddGrade(6.11);
-            // book.AddGrade(4.1);
-            // book.AddGrade(56.1);
+            // inMemoryBook.GradeAdded += OnGradeAdded;
 
+            // EnterGrades(inMemoryBook);
+            EnterGrades(diskBook);
+            
+            // inMemoryBook.ShowStats();
+            diskBook.ShowStats();
+        }
+
+        private static void EnterGrades(IBook inMemoryBook)
+        {
             while (true)
             {
                 string userInput = Console.ReadLine();
@@ -25,16 +30,15 @@ namespace GradeBook
                     {
                         break;
                     }
+
                     double newInput = Convert.ToDouble(userInput);
-                    book.AddGrade(newInput);
+                    inMemoryBook.AddGrade(newInput);
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine($"Exception {e}");
                 }
             }
-            
-            book.ShowStats();
         }
 
         static void OnGradeAdded(object sender, EventArgs eventArgs)
